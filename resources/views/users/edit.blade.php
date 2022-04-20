@@ -12,7 +12,7 @@
         @error('name')
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Error!</strong> Este usuario ya está Registrado.
+            <strong>¡Error!</strong> Este usuario ya está registrado.
       </div>
          
         @enderror 
