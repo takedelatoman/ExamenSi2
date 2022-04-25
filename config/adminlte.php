@@ -258,6 +258,12 @@ return [
             'route'  => 'users.index',
             'icon' => 'fas fa-fw fa-user',
         ],
+
+        [
+            'text' => 'Medicos',
+            'route'  => 'medicos.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
