@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medico;
+use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class medicoController extends Controller
+class pacienteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class medicoController extends Controller
      */
     public function index()
     {
-        $medicos = Medico::all();
-        return view('medicos.index',compact('medicos'));
+        $pacientes = Paciente::all();
+        return view('pacientes.index',compact('pacientes'));
     }
 
     /**
@@ -26,7 +26,7 @@ class medicoController extends Controller
      */
     public function create()
     {
-        return view('medicos.create');
+        return view('pacientes.create');
     }
 
     /**
@@ -37,28 +37,25 @@ class medicoController extends Controller
      */
     public function store(Request $request)
     {
-        $medico = new Medico();
-        $medico->nombre = $request->input('nombre');
-        $medico->direccion = $request->input('direccion');
-        $medico->area_desemp = $request->input('area_desemp');
-        $medico->telefono = $request->input('telefono');
-        
-        $medico->save();
-        
+        $paciente = new Paciente();
+        $paciente->ci = $request->input('ci');  
+        $paciente->nombre = $request->nombre;
+        $paciente->fecha_Nac = $request->input('fecha_Nac');
+        $paciente->email = $request->input('email');
+        $paciente->sexo = $request->input('sexo'); 
+        $paciente->telefono = $request->input('telefono');  
+        $paciente->save();
+
         $user = new User();
-        $user->name = $medico->nombre;
+        $user->name = $paciente->nombre;
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
-        $user->id_p = $medico->id;
-        $user->assignRole('Medico');
+        $user->id_p = $paciente->id;
+        $user->assignRole('Paciente');
         $user->save();
 
-      
-        return redirect()->route('medicos.index', compact('medico'));
-
+        return redirect()->route('pacientes.index',compact('paciente'));
         
-   
-           
     }
 
     /**
@@ -80,8 +77,8 @@ class medicoController extends Controller
      */
     public function edit($id)
     {
-        $medico=Medico::findOrFail($id);
-        return view('medicos.edit',compact('medico'));
+        $paciente=Paciente::findOrFail($id);
+        return view('pacientes.edit',compact('paciente'));
 
     }
 
@@ -94,19 +91,20 @@ class medicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $medico=Medico::findOrFail($id);
-        $medico->nombre = $request->input('nombre');
-        $medico->direccion = $request->input('direccion');
-        $medico->area_desemp = $request->input('area_desemp');
-        $medico->telefono = $request->input('telefono');
-        $medico->save();
-     
-        $user = User::where('id_p',$medico->id)->first();
-        $user->name = $medico->nombre;
+       
+        $paciente = Paciente::findOrFail($id);
+        $paciente->ci = $request->input('ci');
+        $paciente->Nombre = $request->input('nombre');
+        $paciente->Fecha_Nac = $request->input('Fecha_Nac');
+        $paciente->sexo = $request->input('sexo');
+        $paciente->telefono = $request->input('telefono');
+        $paciente->save();
+
+        $user = User::where('id_p',$paciente->id)->first();
+        $user->name = $paciente->Nombre;
         $user->save();
-
-
-        return redirect()->route('medicos.index');
+     
+        return redirect()->route('pacientes.index');
 
     }
 
@@ -118,15 +116,12 @@ class medicoController extends Controller
      */
     public function destroy($id)
     {
-        $medico = Medico::findOrFail($id);
-        $medico->delete();
+        $paciente = Paciente::findOrFail($id);
+        $paciente->delete();
 
-        $user = User::where('id_p', $medico->id);
+        $user = User::where('id_p', $paciente->id);
         $user->delete();
 
-        return redirect()->route('medicos.index');
-
-
-
+        return redirect()->route('pacientes.index');
     }
 }

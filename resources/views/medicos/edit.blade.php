@@ -3,61 +3,59 @@
 @section('title', 'Clinica LOL')
 
 @section('content_header')
-    <h1>Editar Usuario</h1>
+    <h1>Editar Medico</h1>
 @stop
 
 @section('content')
 <div class="card">
     <div class="card-body">
-        @error('name')
-        <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Error!</strong> Este usuario ya está registrado.
-      </div>
-         
-        @enderror 
-            <form action="{{route('users.update', $user)}}" method="post" novalidate >
+        
+        
+        
+ 
+     
+            <form action="{{ route('medicos.update', $medico) }}" method="post" >
                 @csrf
-                @method('put')
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">Ingrese el nombre de usuario</label>
-                        <input type="text" name="name" class="form-control" value="{{old('name', $user->name)}}" id="name">
-                        
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="activar-contraseña">Nueva contraseña</label>
-                        <input type="checkbox" name="activar-contraseña" id="check_password" onclick="cambiarEstado()" >
-                        <input type="password" name="password" class="form-control" value="{{old('password')}}" id="passwordInput" placeholder="Escriba la nueva contraseña">
-                        @error('password')
-                            <small>*{{$message}}</small>
-                            <br><br>
-                        @enderror
-                    </div>
-                </div>
+                 @method('PATCH')
 
-
-                <div>
-                    <p>Seleccione un rol</p>
-                    <select name="roles" id="select-roles" class="form-control" onchange="habilitar()" >
-                        <option value="{{old('roles' ,$rol->role_id)}}">{{$rol_name->name}}</option>
-                            @foreach ($roles as $rol)
-                                <option value="{{ $rol->id }}">{{ $rol->name }}</option>
-                            @endforeach
-                    </select>
-                    @error('roles')
-                        <small>*{{$message}}</small>
-                        <br><br>
-                    @enderror
-                </div>
-
-                <div>
-                    
-                </div>
-                <br>
+                <label for="nombre">Ingrese el nombre del Medico</label>
+                <input type="text" name="nombre" class="form-control" value="{{$medico->nombre}}
+                " required>
                 
-                <button  class="btn btn-primary" type="submit">Actualizar Usuario</button>
-                <a class="btn btn-danger" href="{{route('users.index')}}">Volver</a>
+                <br>
+                <label for="direccion">Ingrese la dirección</label>
+                <input type="text" name="direccion" class="form-control" value="{{$medico->direccion}}" required>
+                
+                
+                <br>
+                <div class="form-group">
+                    <label for="area_desemp">Ingresa Área de desempeño</label>
+                    <select name="area_desemp"  class="focus border-primary  form-control">
+                        <option value="Pediatría">Pedriatria</option>
+                        <option value="Medicina General">Medicina General</option>
+                        <option value="Cirugía General">Cirugía General</option>
+                        <option value="Dermatología">Dermatología</option>
+                        <option value="Cardiología Clínica">Cardiología Clínica</option>
+                        <option value="Cirugía Pediátrica">Cirugía Pediátrica</option>
+                        <option value="Oftalmología">Oftalmología</option>
+                        <option value="Otorrinolaringología">Otorrinolaringología</option>
+                        <option value="Urología">Urologíal</option>
+                        <option value="Cardiología">Cardiología</option>
+                    </select>
+                </div>
+
+                
+
+                <label for="telefono">Ingrese el Teléfono</label>
+                <input type="number" name="telefono" class="form-control" value="{{$medico->telefono}}" required>
+                
+                
+
+              
+                <br>
+
+                <button  class="btn btn-danger btn-sm" type="submit">Editar Usuario</button>
+                <a class="btn btn-primary btn-sm" href="{{route('medicos.index')}}">Volver</a>
             </form>
 
     </div>
@@ -65,26 +63,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', cargar, false);
-    let checkP = document.getElementById('check_password');
-    let contra = document.getElementById('passwordInput');
-    function cambiarEstado(){
-        if(contra.disabled == true){
-            contra.disabled = false
-        }else{
-        if(contra.disabled == false){
-            contra.disabled = true
-            contra.value = ''
-        }
-        }
-    }
     var rol = document.getElementById('select-roles');
     var empleados = document.getElementById('select-empleados');
-    
-    function cargar(){
-        contra.disabled = true
-        contra.value = ''
-        empleados.disabled  = false
-    }
     function habilitar(){
         if(rol.value > 0){
             empleados.disabled = false
@@ -93,7 +73,15 @@
             empleados.value = 0
         }
     }
-   
+    function cargar(){
+        if(rol.value > 0){
+            empleados.disabled = false
+        }else{
+            empleados.disabled = true
+            empleados.value = 0
+        }
+    }
+    
 </script>
 @stop
 

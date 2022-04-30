@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Clinica LOL',
+    'title' => 'Clinica TAKE',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -123,14 +123,14 @@ return [
 
     'classes_body' => '',
     'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand_text' => 'navy-navy',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
+    'classes_sidebar' => 'navbar-navy elevation-4',
+    'classes_sidebar_nav' => 'navy-navy',
+    'classes_topnav' => 'accent-dark navbar-navy',
+    'classes_topnav_nav' => 'navy-expand',
     'classes_topnav_container' => 'container',
 
     /*
@@ -150,10 +150,10 @@ return [
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_theme' => 'os-theme-dark',
     'sidebar_scrollbar_auto_hide' => 'l',
-    'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_nav_accordion' => false,
+    'sidebar_nav_animation_speed' => 50,
 
     /*
     |--------------------------------------------------------------------------
@@ -169,11 +169,11 @@ return [
 
     'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
+    'right_sidebar_theme' => 'ligth',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
-    'right_sidebar_scrollbar_theme' => 'os-theme-light',
-    'right_sidebar_scrollbar_auto_hide' => 'l',
+    'right_sidebar_scrollbar_theme' => 'os-theme-dark',
+    'right_sidebar_scrollbar_auto_hide' => '1',
 
     /*
     |--------------------------------------------------------------------------
@@ -187,7 +187,7 @@ return [
     |
     */
 
-    'use_route_url' => false,
+    'use_route_url' => true,
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
@@ -229,11 +229,11 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:
@@ -251,18 +251,23 @@ return [
         [
             'text' => 'Roles',
             'route'  => 'roles.index',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-bacteria',
         ],
         [
             'text' => 'Usuarios',
             'route'  => 'users.index',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-book-medical',
         ],
 
         [
             'text' => 'Medicos',
             'route'  => 'medicos.index',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-user-md',
+        ],
+        [
+            'text' => 'Pacientes',
+            'route'  => 'pacientes.index',
+            'icon' => 'fas fa-allergies',
         ],
         [
             'text' => 'change_password',

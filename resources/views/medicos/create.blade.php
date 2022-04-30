@@ -25,8 +25,22 @@
                 
                 
                 <br>
-                <label for="area_desemp">Ingrese el area de Desempeño</label>
-                <input type="text" name="area_desemp" class="form-control" value="" required>
+                <div class="form-group">
+                    <label for="area_desemp">Ingresa Área de desempeño</label>
+                    <select name="area_desemp"  class="focus border-primary  form-control">
+                            <option value="Pediatría">Pedriatria</option>
+                            <option value="Medicina General">Medicina General</option>
+                            <option value="Cirugía General">Cirugía General</option>
+                            <option value="Dermatología">Dermatología</option>
+                            <option value="Cardiología Clínica">Cardiología Clínica</option>
+                            <option value="Cirugía Pediátrica">Cirugía Pediátrica</option>
+                            <option value="Oftalmología">Oftalmología</option>
+                            <option value="Otorrinolaringología">Otorrinolaringología</option>
+                            <option value="Urología">Urologíal</option>
+                            <option value="Cardiología">Cardiología</option>
+                    </select>
+                </div>
+
                 
 
                 <label for="telefono">Ingrese el Teléfono</label>
