@@ -21,10 +21,10 @@
                         <th scope="col">ID</th>
                         <th scope="col">CI</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Fecha_Nac</th>
+                        <th scope="col">Fecha Nacimieto</th>
                         <th scope="col">Email</th>
-                        <th scope="col">sexo</th>
-                        <th scope="col">telefono</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Teléfono</th>
                         
                       
                     </tr>

@@ -270,6 +270,17 @@ return [
             'icon' => 'fas fa-allergies',
         ],
         [
+            'text' => 'Citas',
+            'route'  => 'citas.index',
+            'icon' => 'fas fa-allergies',
+        ],
+        [
+            'text' => 'historial clinico',
+            'route'  => 'citas.index',
+            'icon' => 'fas fa-allergies',
+        ],
+    
+        [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',

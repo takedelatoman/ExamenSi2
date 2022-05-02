@@ -119,7 +119,7 @@ class pacienteController extends Controller
         $paciente = Paciente::findOrFail($id);
         $paciente->delete();
 
-        $user = User::where('id_p', $paciente->id);
+        $user = User::where('id_p', $paciente->id)->first();
         $user->delete();
 
         return redirect()->route('pacientes.index');
