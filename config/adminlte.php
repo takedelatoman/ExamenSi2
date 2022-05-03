@@ -254,6 +254,11 @@ return [
             'icon' => 'fas fa-bacteria',
         ],
         [
+            'text' => 'Bitacora',
+            'route'  => 'Bitacora.index',
+            'icon' => 'fas fa-bacteria',
+        ],
+        [
             'text' => 'Usuarios',
             'route'  => 'users.index',
             'icon' => 'fas fa-book-medical',
@@ -276,10 +281,14 @@ return [
         ],
         [
             'text' => 'historial clinico',
-            'route'  => 'citas.index',
+            'route'  => 'historialesclinicos.index',
             'icon' => 'fas fa-allergies',
         ],
-    
+        [
+            'text' => 'Bitacora',
+            'route'  => 'historialesclinicos.index',
+            'icon' => 'fas fa-allergies',
+        ],
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',

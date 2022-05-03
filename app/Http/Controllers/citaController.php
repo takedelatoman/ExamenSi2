@@ -6,6 +6,7 @@ use App\Models\Cita;
 use App\Models\Medico;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class citaController extends Controller
 {
@@ -53,6 +54,12 @@ return view('citas.index', compact('medicos', 'pacientes', 'citas'));
         $cita->id_medico = $request->input('id_medico');
         $cita->id_paciente = $request->input('id_paciente');
         $cita->save();
+
+
+        activity()->useLog('cita medica')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $cita->id;
+        $lastActivity->save();
 
         return redirect()->route('citas.index');
     }
@@ -105,6 +112,11 @@ return view('citas.index', compact('medicos', 'pacientes', 'citas'));
         $cita->id_paciente = $request->input('id_paciente');
         $cita->save();
 
+        activity()->useLog('cita medica')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $cita->id;
+        $lastActivity->save();
+
         return redirect()->route('citas.index');
     }
 
@@ -118,6 +130,11 @@ return view('citas.index', compact('medicos', 'pacientes', 'citas'));
     {
         $cita = Cita::where('id',$id)->first();
         $cita->delete();
+
+        activity()->useLog('cita medica')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $cita->id;
+        $lastActivity->save();
 
         return redirect()->route('citas.index');
     }

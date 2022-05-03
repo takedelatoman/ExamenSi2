@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -57,7 +58,16 @@ class UserController extends Controller
         $usuario->password = bcrypt(($request->password));
         $usuario->save();
         $usuario->roles()->sync($request->roles);
+
+        activity()->useLog('Usuarios')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $usuario->id;
+        $lastActivity->save();
+
+
         return redirect()->route('users.index');
+
+
     }
 
 
@@ -82,12 +92,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::all();
         $user = User::find($id);
         $rol = DB::table('model_has_roles')->where('model_id', $user->id)->first();
         $rol_name = DB::table('roles')->where('id', $rol->role_id)->first();
         return view('users.edit', compact('user', 'roles', 'rol', 'rol_name'));
-        return view('users.edit', compact('user', 'empleados', 'roles', 'rol', 'rol_name', 'empleado', 'e'));
-        return view('users.edit', compact('user'));
+        
     }
 
 
@@ -116,6 +126,13 @@ class UserController extends Controller
         $usuario->save();
         $usuario->roles()->sync($request->roles);
 
+        activity()->useLog('Usuarios')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $usuario->id;
+        $lastActivity->save();
+
+
+
         return redirect()->route('users.index');
     }
 
@@ -129,6 +146,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
+
+        activity()->useLog('Usuarios')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $user->id;
+        $lastActivity->save();
         
         return redirect('users');
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Medico;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class medicoController extends Controller
 {
@@ -52,6 +53,11 @@ class medicoController extends Controller
         $user->id_p = $medico->id;
         $user->assignRole('Medico');
         $user->save();
+
+        activity()->useLog('medico')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $medico->id;
+        $lastActivity->save();
 
       
         return redirect()->route('medicos.index', compact('medico'));
@@ -105,6 +111,11 @@ class medicoController extends Controller
         $user->name = $medico->nombre;
         $user->save();
 
+        activity()->useLog('medico')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $medico->id;
+        $lastActivity->save();
+
 
         return redirect()->route('medicos.index');
 
@@ -123,6 +134,11 @@ class medicoController extends Controller
 
         $user = User::where('id_p', $medico->id);
         $user->delete();
+
+        activity()->useLog('medico')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $medico->id;
+        $lastActivity->save();
 
         return redirect()->route('medicos.index');
 
